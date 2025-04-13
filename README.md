@@ -28,6 +28,14 @@ docker build -t tarefas-front .
 docker run -d -p 80:80 --name tarefas-app tarefas-front
 ```
 
+## Ponha a imagem dentro de uma rede
+
+```
+docker network create mynetwork   (caso ainda nao tenha criado sua network)
+docker network connect mynetwork tarefas-app   
+```
+
+
 Acesse no navegador:
 
 
@@ -54,3 +62,15 @@ Ver logs: docker logs tarefas-app
 5. **.dockerignore**: Evita cópia de arquivos desnecessários para o container
 
 Para usar, basta seguir os passos do README. A aplicação será servida através do Nginx na porta 80 com tamanho final de imagem em torno de 50MB.
+
+
+
+## img no docker hub
+
+https://hub.docker.com/r/giovanerr10/tarefas-front
+
+para usar:
+```
+docker pull giovanerr10/tarefas-front:v1
+
+```
