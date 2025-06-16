@@ -1,0 +1,23 @@
+apiVersion: apps/v1 # Especifica a versão da API do Kubernetes para o objeto Deployment.
+kind: Deployment # Define o tipo de objeto Kubernetes como um Deployment.
+metadata: # Contém metadados sobre o Deployment.
+  name: frontend-deployment # O nome do Deployment.
+spec: # Define o estado desejado do Deployment.
+  replicas: 1 # Especifica que uma única réplica (instância) do pod do aplicativo deve ser executada.
+  selector: # Define como o Deployment encontra os Pods que ele gerencia.
+    matchLabels: # Os Pods gerenciados por este Deployment devem ter o label `app: frontend`.
+      app: frontend 
+  template: # Define o template para os Pods que serão criados.
+    metadata: # Metadados para os Pods.
+      labels: # Labels aplicados aos Pods.
+        app: frontend # Label para corresponder ao `selector` do Deployment.
+    spec: # Especificação do Pod.
+      containers: # Define os contêineres que serão executados dentro do Pod.
+        - name: frontend # O nome do contêiner.
+          image: tarefas-front:v1  # A imagem Docker a ser usada para este contêiner. Substitua pela sua imagem e tag reais.
+          ports: # Define as portas que o contêiner expõe.
+            - containerPort: 80 # O contêiner escuta na porta 80.
+          resources: # Define os limites de recursos para o contêiner.
+            limits: # Limites máximos de recursos que o contêiner pode consumir.
+              memory: "256Mi" # Limite de memória de 256 Mebibytes.
+              cpu: "500m" # Limite de CPU de 0.5 CPU (500 millicores).

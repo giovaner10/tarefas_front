@@ -1,0 +1,12 @@
+apiVersion: v1 # Especifica a versão da API do Kubernetes para o objeto Service.
+kind: Service # Define o tipo de objeto Kubernetes como um Service.
+metadata: # Contém metadados sobre o Service.
+  name: frontend-service # O nome do Service.
+spec: # Define o estado desejado do Service.
+  selector: # Define como o Service encontra os Pods para os quais ele roteará o tráfego.
+    app: frontend # Roteia o tráfego para Pods com o label `app: frontend`. Isso deve corresponder aos labels dos Pods criados pelo Deployment.
+  type: LoadBalancer # Expõe o Service externamente usando um balanceador de carga do provedor de nuvem. Outros tipos comuns são ClusterIP e NodePort.
+  ports: # Define as portas do Service.
+    - protocol: TCP # O protocolo da porta.
+      port: 80 # A porta na qual o Service estará escutando (porta externa do balanceador de carga).
+      targetPort: 80 # A porta nos Pods para a qual o tráfego será encaminhado. Deve corresponder à `containerPort` definida no Deployment.
